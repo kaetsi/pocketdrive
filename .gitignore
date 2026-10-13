@@ -1,3 +1,9 @@
 .vscode/
 venv/
 .env
+__pycache__/
+*.pyc
+staticfiles/
+db.sqlite3
+.django_tailwind_cli/
+assets/css/
