@@ -1,0 +1,26 @@
+{% load static tailwind_cli %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}My Site{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/output.css' %}">
+  {% tailwind_css %}
+</head>
+<body class="min-h-screen bg-gray-50 text-green-800">
+  <header class="bg-white shadow">
+    <nav class="mx-auto flex max-w-5xl items-center justify-between p-4">
+      <a href="/" class="text-xl font-bold text-red-600">MySite</a>
+      <div class="flex gap-4 text-sm">
+        <a href="/" class="hover:text-blue-600">Home</a>
+        <a href="#" class="hover:text-blue-600">About</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="mx-auto max-w-5xl p-4">
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>
