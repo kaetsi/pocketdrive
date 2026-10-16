@@ -16,16 +16,17 @@
   </header>
   <main class="flex flex-col justify-center items-center h-215">
     <div class="action-buttons flex gap-5 items-start">
-      <button class="px-3 py-2 bg-sky-500 text-white cursor-pointer">Create a drop</button>
-      <button class="px-3 py-2 bg-sky-500 text-white cursor-pointer">Retrive a drop</button>
+      <form method="POST" action="{% url 'cdb' %}">
+        {% csrf_token %}
+        <button class="px-3 py-2 bg-sky-500 text-white cursor-pointer" type="submit">Create a drop</button>
+        <button class="px-3 py-2 bg-sky-500 text-white cursor-pointer" type="submit">Retrive a drop</button>
+      </form>
     </div>
-    <div class="action-section flex flex-col my-10">
-      <label for="">Text or Link:</label>
-      <input class="border-2 border-[rgb(88,164,176)] rounded-2l p-3 w-100" type="text">
-      <label class="pt-5" for="">Magic Word:</label>
-      <input class="border-2 border-[rgb(88,164,176)] rounded-2l p-3 w-100" type="text">
-      <button class="px-3 py-2 my-5 bg-sky-500 text-white cursor-pointer">Create</button>
-    </div>
+    {% block content %}
+    <h1>N drops created.</h1>
+    <h1>N drops retrived.</h1>
+    <h1>N drops destroyed.</h1>
+    {% endblock %}
   </main>
   <footer class="flex justify-evenly items-center h-12">
     <div class="">Copyright © 2026 pocketdrive.online All rights reserved.</div>
