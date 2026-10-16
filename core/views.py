@@ -5,3 +5,6 @@ def home(request):
 
 def create_drop_box(request):
     return render(request, "create_drop_box.html")
+
+def retrive_drop_box(request):
+    return render(request, "retrive_drop_box.html")
