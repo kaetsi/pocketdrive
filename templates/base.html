@@ -5,22 +5,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}My Site{% endblock %}</title>
-  <link rel="stylesheet" href="{% static 'css/output.css' %}">
   {% tailwind_css %}
 </head>
-<body class="min-h-screen bg-gray-50 text-green-800">
-  <header class="bg-white shadow">
-    <nav class="mx-auto flex max-w-5xl items-center justify-between p-4">
-      <a href="/" class="text-xl font-bold text-red-600">MySite</a>
-      <div class="flex gap-4 text-sm">
-        <a href="/" class="hover:text-blue-600">Home</a>
-        <a href="#" class="hover:text-blue-600">About</a>
-      </div>
+<body class="bg-[rgb(27,27,30)] text-[rgb(216,219,226)]">
+  <header>
+    <nav class="flex justify-between px-25 py-2 text-2xl">
+      <p class="name">pocketdrive.online</p>
+      <p class="question"><a href="#">How to use?</a></p>
     </nav>
   </header>
-
-  <main class="mx-auto max-w-5xl p-4">
-    {% block content %}{% endblock %}
+  <main class="flex flex-col justify-center items-center h-215">
+    <div class="action-buttons flex gap-5 items-start">
+      <button class="px-3 py-2 bg-sky-500 text-white cursor-pointer">Create a drop</button>
+      <button class="px-3 py-2 bg-sky-500 text-white cursor-pointer">Retrive a drop</button>
+    </div>
+    <div class="action-section flex flex-col my-10">
+      <label for="">Text or Link:</label>
+      <input class="border-2 border-[rgb(88,164,176)] rounded-2l p-3 w-100" type="text">
+      <label class="pt-5" for="">Magic Word:</label>
+      <input class="border-2 border-[rgb(88,164,176)] rounded-2l p-3 w-100" type="text">
+      <button class="px-3 py-2 my-5 bg-sky-500 text-white cursor-pointer">Create</button>
+    </div>
   </main>
+  <footer class="flex justify-evenly items-center h-12">
+    <div class="">Copyright © 2026 pocketdrive.online All rights reserved.</div>
+    <div class="flex gap-5">
+      <p>Privacy Policy</p>
+      <p>Terms of Use</p>
+    </div>
+    <div class="">
+      <p>GitHub Repository</p>
+    </div>
+  </footer>
 </body>
 </html>
