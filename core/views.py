@@ -31,3 +31,4 @@ def create_drop(request):
             return render(request, "pin_page.html", {"pin":pin})
 
     return render(request, "create_drop_box.html")
+

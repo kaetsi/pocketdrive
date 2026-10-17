@@ -4,4 +4,5 @@ from . import views
 urlpatterns = [
     path('', views.home, name="home"),
     path('cdb/', views.create_drop_box, name="cdb"),
+    path('pin/', views.create_drop, name="create_drop"),
 ]
