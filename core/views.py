@@ -10,10 +10,9 @@ def home(request):
 def create_drop_box(request):
     return render(request, "create_drop_box.html")
 
-<<<<<<< HEAD
 def retrive_drop_box(request):
     return render(request, "retrive_drop_box.html")
-=======
+
 def create_drop(request):
     if request.method == "POST":
         drop = request.POST.get("drop", "").strip()
@@ -32,4 +31,3 @@ def create_drop(request):
             return render(request, "pin_page.html", {"pin":pin})
 
     return render(request, "create_drop_box.html")
->>>>>>> feature/create-drop
