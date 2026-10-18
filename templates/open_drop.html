@@ -10,5 +10,10 @@
       <p class="font-bold">Your drop:</p>
       <p>{{ text_url }}</p>
     </div>
+    <form method="POST" action="{% url 'destroy_drop' %}">
+        {% csrf_token %}
+        <input type="hidden" name="lookup" value="{{ lookup }}">
+        <button type="submit" class="px-3 py-2 my-5 bg-red-500 text-white cursor-pointer" onclick="return confirm('Destroy this drop? This cannot be undone.')">Destroy this drop</button>
+    </form>
     {% endif %}
 {% endblock %}

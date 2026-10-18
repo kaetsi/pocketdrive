@@ -33,17 +33,26 @@ def create_drop(request):
     return render(request, "create_drop_box.html")
 
 def retrive_drop(request):
-    drop, error = None, None
+    text_url, error, lookup = None, None, None
 
     if request.method == "POST":
         pin = request.POST.get("pin", "").strip().upper()
         magic_word = request.POST.get("magic_word", "").strip()
 
-        drop = Drop.objects.filter(lookup=lookup_hash(pin, magic_word)).first()
+        lookup = lookup_hash(pin, magic_word)
+        drop = Drop.objects.filter(lookup=lookup).first()
 
         if drop:
             text_url = Fernet(make_key(pin, magic_word, drop.salt)).decrypt(drop.drop.encode()).decode()
         else:
             error = "Wrong PIN or magic word"
+            lookup = None
 
-    return render(request, "open_drop.html", {"text_url": text_url, "error": error})
+    return render(request, "open_drop.html", {"text_url": text_url, "error": error, "lookup": lookup})
+
+def destroy_drop(request):
+    if request.method == "POST":
+        lookup = request.POST.get("lookup", "")
+        Drop.objects.filter(lookup=lookup).delete()
+
+    return render(request, "destroy_drop.html")
