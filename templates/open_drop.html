@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if error %}
+    <p class="text-red-500">{{ error }}</p>
+    {% endif %}
+
+    {% if text_url %}
+    <div class="border-2 border-[rgb(88,164,176)] p-3 w-100">
+      <p class="font-bold">Your drop:</p>
+      <p>{{ text_url }}</p>
+    </div>
+    {% endif %}
+{% endblock %}
