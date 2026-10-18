@@ -1,0 +1,9 @@
+{
+  "build": {
+    "buildCommand": "python manage.py tailwind build && python manage.py collectstatic --noinput"
+  },
+  "deploy": {
+    "preDeployCommand": "python manage.py migrate",
+    "startCommand": "gunicorn config.wsgi --bind 0.0.0.0:$PORT --timeout 30"
+  }
+}
