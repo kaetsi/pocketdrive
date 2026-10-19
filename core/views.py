@@ -9,7 +9,8 @@ def get_stats(request):
     return stats
 
 def home(request):
-    return render(request, "base.html")
+    stats = get_stats()
+    return render(request, "base.html", {"stats": stats})
 
 def create_drop_box(request):
     return render(request, "create_drop_box.html")
@@ -53,6 +54,10 @@ def retrive_drop(request):
         drop = Drop.objects.filter(lookup=lookup).first()
 
         if drop:
+            stats = get_stats()
+            stats.retrived = stats.retrived + 1
+            stats.save()
+
             text_url = Fernet(make_key(pin, magic_word, drop.salt)).decrypt(drop.drop.encode()).decode()
             request.session.pop("new_pin", None)
         else:
@@ -65,6 +70,11 @@ def destroy_drop(request):
     if request.method == "POST":
         lookup = request.POST.get("lookup", "")
         Drop.objects.filter(lookup=lookup).delete()
+
+        stats = get_stats()
+        stats.destroyed = stats.destroyed + 1
+        stats.save()
+
         request.session.pop("new_pin", None)
 
     return redirect("home")
