@@ -3,5 +3,6 @@
 {% block content %}
     <div class="w-50 l-30 text-white mt-20 flex text-center justify-center py-10">
         <p class="text-4xl">{{ pin }}</p>
+        <a class="inline-block mt-10" href="{% url 'clear_pin' %}">Done</a>
     </div>
 {% endblock %}

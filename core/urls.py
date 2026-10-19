@@ -8,4 +8,6 @@ urlpatterns = [
     path('pin/', views.create_drop, name="create_drop"),
     path('drop/', views.retrive_drop, name="retrive_drop"),
     path('destroy/', views.destroy_drop, name="destroy_drop"),
+    path('pin-created/', views.pin_page, name="pin_page"),
+    path('pin-done/', views.clear_pin, name="clear_pin"),
 ]

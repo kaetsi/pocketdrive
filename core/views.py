@@ -1,6 +1,6 @@
 from .utils import generate_pin, lookup_hash, make_key
 from cryptography.fernet import Fernet
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Drop
 import secrets
 
@@ -28,7 +28,8 @@ def create_drop(request):
             token = Fernet(make_key(pin, magic_word, salt)).encrypt(drop.encode())
 
             Drop.objects.create(lookup=lookup_hash(pin, magic_word), salt=salt, drop=token.decode())
-            return render(request, "pin_page.html", {"pin":pin})
+            request.session["new_pin"] = pin
+            return redirect("pin_page")
 
     return render(request, "create_drop_box.html")
 
@@ -44,6 +45,7 @@ def retrive_drop(request):
 
         if drop:
             text_url = Fernet(make_key(pin, magic_word, drop.salt)).decrypt(drop.drop.encode()).decode()
+            request.session.pop("new_pin", None)
         else:
             error = "Wrong PIN or magic word"
             lookup = None
@@ -54,5 +56,18 @@ def destroy_drop(request):
     if request.method == "POST":
         lookup = request.POST.get("lookup", "")
         Drop.objects.filter(lookup=lookup).delete()
+        request.session.pop("new_pin", None)
 
-    return render(request, "destroy_drop.html")
+    return redirect("home")
+
+def pin_page(request):
+    pin = request.session.get("new_pin")
+
+    if not pin:
+        return redirect("cbd")
+
+    return render(request, "pin_page.html", {"pin": pin})
+
+def clear_pin(request):
+    request.session.pop("new_pin")
+    return redirect("home")
