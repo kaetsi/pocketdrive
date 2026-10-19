@@ -1,8 +1,12 @@
 from .utils import generate_pin, lookup_hash, make_key
 from cryptography.fernet import Fernet
 from django.shortcuts import render, redirect
-from .models import Drop
+from .models import Drop, Stats
 import secrets
+
+def get_stats(request):
+    stats, _ = Stats.objects.get_or_create(id=1)
+    return stats
 
 def home(request):
     return render(request, "base.html")
@@ -28,6 +32,11 @@ def create_drop(request):
             token = Fernet(make_key(pin, magic_word, salt)).encrypt(drop.encode())
 
             Drop.objects.create(lookup=lookup_hash(pin, magic_word), salt=salt, drop=token.decode())
+
+            stats = get_stats()
+            stats.created = stats.created + 1
+            stats.save()
+
             request.session["new_pin"] = pin
             return redirect("pin_page")
 
