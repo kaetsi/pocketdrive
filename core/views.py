@@ -4,13 +4,13 @@ from django.shortcuts import render, redirect
 from .models import Drop, Stats
 import secrets
 
-def get_stats(request):
+def get_stats():
     stats, _ = Stats.objects.get_or_create(id=1)
     return stats
 
 def home(request):
     stats = get_stats()
-    return render(request, "base.html", {"stats": stats})
+    return render(request, "home_page.html", {"stats": stats})
 
 def create_drop_box(request):
     return render(request, "create_drop_box.html")
