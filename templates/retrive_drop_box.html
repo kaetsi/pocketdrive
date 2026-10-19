@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="action-section flex flex-col my-10">
-      <form method="POST" action="{% url 'retrive_drop' %}">
+      <form method="POST" action="{% url 'retrive_drop' %}" class="action-section flex flex-col my-10">
         {% csrf_token %}
         <label for="">PIN:</label>
         <input class="border-2 border-[rgb(88,164,176)] rounded-2l p-3 w-100" type="text" name="pin">
@@ -10,5 +9,4 @@
         <input class="border-2 border-[rgb(88,164,176)] rounded-2l p-3 w-100" type="text" name="magic_word">
         <button class="px-3 py-2 my-5 bg-sky-500 text-white cursor-pointer">Retrive</button>
       </form>
-    </div>
 {% endblock %}
